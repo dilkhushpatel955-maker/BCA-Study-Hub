@@ -1,13 +1,91 @@
-
-<!DOCTYPE html>
-<html lang="hi">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>BCA Study Hub</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Welcome to BCA Study Hub!</h1>
-  <p>Yahan BCA ke notes aur study material milenge.</p>
+  <header class="topbar">
+    <div class="brand"><div class="brand-mark">B</div><div><strong>BCA Study Hub</strong><small>Learn • Practice • Grow</small></div></div>
+    <div class="top-actions">
+      <span id="userLabel" class="user-label">Not signed in</span>
+      <button id="signOutBtn" class="btn btn-light hidden">Sign out</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="authSection" class="auth-layout">
+      <div class="hero">
+        <span class="eyebrow">YOUR BCA LEARNING SPACE</span>
+        <h1>Study smarter.<br><span>Grow together.</span></h1>
+        <p>Semester-wise syllabus, notes, PDFs, practicals and useful study material in one place.</p>
+        <div class="hero-pills"><span>📘 Syllabus</span><span>📄 Notes & PDFs</span><span>💻 Practicals</span></div>
+      </div>
+      <div class="panel auth-panel">
+        <div class="tabs"><button class="tab active" data-mode="login">Login</button><button class="tab" data-mode="signup">Create account</button></div>
+        <h2 id="authTitle">Welcome back</h2>
+        <p class="muted" id="authSubtitle">Sign in to access your study material.</p>
+        <form id="authForm">
+          <label for="authName" id="nameLabel" class="hidden">Full name</label>
+          <input id="authName" class="hidden" autocomplete="name" placeholder="Your full name">
+          <label for="authEmail">Email address</label>
+          <input id="authEmail" type="email" autocomplete="email" required placeholder="you@example.com">
+          <label for="authPassword">Password</label>
+          <input id="authPassword" type="password" minlength="6" autocomplete="current-password" required placeholder="At least 6 characters">
+          <button id="authSubmit" class="btn btn-primary full" type="submit">Login</button>
+          <button id="resetPassword" type="button" class="text-btn">Forgot password?</button>
+          <p id="authMessage" class="message" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <section id="appSection" class="hidden">
+      <div class="welcome-row">
+        <div><span class="eyebrow">STUDENT DASHBOARD</span><h1>Keep learning, <span id="welcomeName">Student</span> 👋</h1><p class="muted">Choose a subject or find study material below.</p></div>
+        <div id="adminBadge" class="admin-badge hidden">⚙ Admin mode</div>
+      </div>
+      <div class="stats">
+        <div class="stat-card"><span class="stat-icon">📚</span><div><strong>6</strong><small>Core subjects</small></div></div>
+        <div class="stat-card"><span class="stat-icon">🧪</span><div><strong>3</strong><small>Practical labs</small></div></div>
+        <div class="stat-card"><span class="stat-icon">🤝</span><div><strong>One</strong><small>Study community</small></div></div>
+      </div>
+
+      <section class="section-block">
+        <div class="section-heading"><div><span class="eyebrow">SEMESTER I</span><h2>Your syllabus</h2></div><span class="muted">BCA • Year 1</span></div>
+        <div id="subjectsGrid" class="subject-grid"></div>
+      </section>
+
+      <section class="section-block">
+        <div class="section-heading"><div><span class="eyebrow">STUDY LIBRARY</span><h2>Notes & materials</h2></div></div>
+        <div class="filters">
+          <input id="searchMaterials" placeholder="Search notes, topic or file…">
+          <select id="subjectFilter"><option value="">All subjects</option></select>
+          <select id="typeFilter"><option value="">All types</option><option>PDF</option><option>Notes</option><option>Question Paper</option><option>Practical</option><option>Link</option></select>
+        </div>
+        <div id="materialsList" class="materials-list"><div class="empty-state">Sign in to load study material.</div></div>
+      </section>
+
+      <section id="adminPanel" class="section-block panel hidden">
+        <div class="section-heading"><div><span class="eyebrow">ADMIN TOOLS</span><h2>Upload study material</h2></div><span class="admin-badge">Admin only</span></div>
+        <p class="muted">Add PDFs, notes, practical files or useful links for your friends.</p>
+        <form id="uploadForm" class="upload-grid">
+          <div><label for="materialTitle">Material title *</label><input id="materialTitle" required maxlength="120" placeholder="e.g. Unit 1 — Computer Fundamentals"></div>
+          <div><label for="materialSubject">Subject *</label><select id="materialSubject" required></select></div>
+          <div><label for="materialType">Material type *</label><select id="materialType" required><option>PDF</option><option>Notes</option><option>Question Paper</option><option>Practical</option><option>Link</option></select></div>
+          <div><label for="materialFile">Choose file (PDF or document)</label><input id="materialFile" type="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.txt,.jpg,.jpeg,.png"></div>
+          <div class="wide"><label for="materialUrl">Or paste a material link</label><input id="materialUrl" type="url" placeholder="https://…"></div>
+          <div class="wide"><label for="materialDescription">Short description</label><textarea id="materialDescription" rows="2" maxlength="500" placeholder="Topics covered, unit number, exam tips…"></textarea></div>
+          <div class="wide"><button class="btn btn-primary" type="submit">Upload / Publish material</button><span id="uploadMessage" class="message" aria-live="polite"></span></div>
+        </form>
+        <p class="small muted">Files are stored in Firebase Storage; material details are stored in Firestore. Configure the security rules in README before sharing the site.</p>
+      </section>
+      <footer>Made for BCA students · Share knowledge, help each other grow.</footer>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status"></div>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
